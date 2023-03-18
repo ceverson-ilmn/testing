@@ -12,7 +12,7 @@ DESTINATION_DATA_ID=$5
 #Get the DESTINATION API Key
 DESTINATION_API_KEY=$6
 
-date > output.tx
+date > output.txt
 echo "Args successfully submitted" >> output.txt
 
 #Make the SOURCE API request for temp storage access credentials
