@@ -27,31 +27,20 @@ date >> output.txt
 echo "Source request submitted" >> output.txt
 
 #Parse the SOURCE KeyID
-#SOURCE_KEY_ID=$(sed 's/.*access_key_id\"\:\"//g' <<< $SOURCE_API_REQ)
-
 SOURCE_KEY_ID=$(echo $SOURCE_API_REQ | sed 's/.*access_key_id\"\:\"//g')
-
-#SOURCE_KEY_ID=$(sed 's/\"\,\"session_token.*//g' <<< $SOURCE_KEY_ID)
 SOURCE_KEY_ID=$(echo $SOURCE_KEY_ID | sed 's/\"\,\"session_token.*//g')
 
-#echo $SOURCE_KEY_ID
-#exit
-
-date >> output.txt
-echo "Source request parsed for revised section" >> output.txt
-
-
 #Parse the SOURCE Access Key
-SOURCE_ACCESS_KEY=$(sed 's/.*secret_access_key\"\:\"//g' <<< $SOURCE_API_REQ)
-SOURCE_ACCESS_KEY=$(sed 's/\"\,\"no_check_bucket.*//g' <<< $SOURCE_ACCESS_KEY)
+SOURCE_ACCESS_KEY=$(echo $SOURCE_API_REQ | sed 's/.*secret_access_key\"\:\"//g')
+SOURCE_ACCESS_KEY=$(echo $SOURCE_ACCESS_KEY | sed 's/\"\,\"no_check_bucket.*//g')
 
 #Parse the SOURCE Session Token
-SOURCE_SESSION_TOKEN=$(sed 's/.*session_token\"\:\"//g' <<< $SOURCE_API_REQ)
-SOURCE_SESSION_TOKEN=$(sed 's/\"\,\"server_side_encryption.*//g' <<< $SOURCE_SESSION_TOKEN)
+SOURCE_SESSION_TOKEN=$(echo $SOURCE_API_REQ | sed 's/.*session_token\"\:\"//g')
+SOURCE_SESSION_TOKEN=$(echo $SOURCE_SESSION_TOKEN | sed 's/\"\,\"server_side_encryption.*//g')
 
 #Parse the SOURCE filePathPrefix
-SOURCE_FILEPATH=$(sed 's/.*filePathPrefix\"\:\"//g' <<< $SOURCE_API_REQ)
-SOURCE_FILEPATH=$(sed 's/\"\,\"storageType.*//g' <<< $SOURCE_FILEPATH)
+SOURCE_FILEPATH=$(echo $SOURCE_API_REQ | sed 's/.*filePathPrefix\"\:\"//g')
+SOURCE_FILEPATH=$(echo $SOURCE_FILEPATH | sed 's/\"\,\"storageType.*//g')
 
 date >> output.txt
 echo "Source request parsed" >> output.txt
