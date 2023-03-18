@@ -27,8 +27,19 @@ date >> output.txt
 echo "Source request submitted" >> output.txt
 
 #Parse the SOURCE KeyID
-SOURCE_KEY_ID=$(sed 's/.*access_key_id\"\:\"//g' <<< $SOURCE_API_REQ)
-SOURCE_KEY_ID=$(sed 's/\"\,\"session_token.*//g' <<< $SOURCE_KEY_ID)
+#SOURCE_KEY_ID=$(sed 's/.*access_key_id\"\:\"//g' <<< $SOURCE_API_REQ)
+
+SOURCE_KEY_ID=$(echo $SOURCE_API_REQ | sed 's/.*access_key_id\"\:\"//g')
+
+#SOURCE_KEY_ID=$(sed 's/\"\,\"session_token.*//g' <<< $SOURCE_KEY_ID)
+SOURCE_KEY_ID=$(echo $SOURCE_KEY_ID | sed 's/\"\,\"session_token.*//g')
+
+#echo $SOURCE_KEY_ID
+#exit
+
+date >> output.txt
+echo "Source request parsed for revised section" >> output.txt
+
 
 #Parse the SOURCE Access Key
 SOURCE_ACCESS_KEY=$(sed 's/.*secret_access_key\"\:\"//g' <<< $SOURCE_API_REQ)
