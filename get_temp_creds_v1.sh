@@ -12,7 +12,7 @@ DESTINATION_DATA_ID=$5
 #Get the DESTINATION API Key
 DESTINATION_API_KEY=$6
 
-date > output.txt
+date > output.tx
 echo "Args successfully submitted" >> output.txt
 
 #Make the SOURCE API request for temp storage access credentials
@@ -57,18 +57,28 @@ date >> output.txt
 echo "Destination request submitted" >> output.txt
 
 #Parse the SOURCE KeyID
-DESTINATION_KEY_ID=$(sed 's/.*access_key_id\"\:\"//g' <<< $DESTINATION_API_REQ)
-DESTINATION_KEY_ID=$(sed 's/\"\,\"session_token.*//g' <<< $DESTINATION_KEY_ID)
+#DESTINATION_KEY_ID=$(sed 's/.*access_key_id\"\:\"//g' <<< $DESTINATION_API_REQ)
+#DESTINATION_KEY_ID=$(sed 's/\"\,\"session_token.*//g' <<< $DESTINATION_KEY_ID)
+DESTINATION_KEY_ID=$(echo $DESTINATION_API_REQ | sed 's/.*access_key_id\"\:\"//g')
+DESTINATION_KEY_ID=$(echo $DESTINATION_KEY_ID | sed 's/\"\,\"session_token.*//g')
+
 #Parse the SOURCE Access Key
-DESTINATION_ACCESS_KEY=$(sed 's/.*secret_access_key\"\:\"//g' <<< $DESTINATION_API_REQ)
-DESTINATION_ACCESS_KEY=$(sed 's/\"\,\"no_check_bucket.*//g' <<< $DESTINATION_ACCESS_KEY)
+#DESTINATION_ACCESS_KEY=$(sed 's/.*secret_access_key\"\:\"//g' <<< $DESTINATION_API_REQ)
+#DESTINATION_ACCESS_KEY=$(sed 's/\"\,\"no_check_bucket.*//g' <<< $DESTINATION_ACCESS_KEY)
+DESTINATION_ACCESS_KEY=$(echo $DESTINATION_API_REQ | sed 's/.*secret_access_key\"\:\"//g')
+DESTINATION_ACCESS_KEY=$(echo $DESTINATION_ACCESS_KEY | sed 's/\"\,\"no_check_bucket.*//g')
+
 #Parse the SOURCE Session Token
-DESTINATION_SESSION_TOKEN=$(sed 's/.*session_token\"\:\"//g' <<< $DESTINATION_API_REQ)
-DESTINATION_SESSION_TOKEN=$(sed 's/\"\,\"server_side_encryption.*//g' <<< $DESTINATION_SESSION_TOKEN)
+#DESTINATION_SESSION_TOKEN=$(sed 's/.*session_token\"\:\"//g' <<< $DESTINATION_API_REQ)
+#DESTINATION_SESSION_TOKEN=$(sed 's/\"\,\"server_side_encryption.*//g' <<< $DESTINATION_SESSION_TOKEN)
+DESTINATION_SESSION_TOKEN=$(echo $DESTINATION_API_REQ | sed 's/.*session_token\"\:\"//g')
+DESTINATION_SESSION_TOKEN=$(echo $DESTINATION_SESSION_TOKEN | sed 's/\"\,\"server_side_encryption.*//g')
+
 #Parse the SOURCE filePathPrefix                                                                                                                                
-                                     
-DESTINATION_FILEPATH=$(sed 's/.*filePathPrefix\"\:\"//g' <<< $DESTINATION_API_REQ)
-DESTINATION_FILEPATH=$(sed 's/\"\,\"storageType.*//g' <<< $DESTINATION_FILEPATH)
+#DESTINATION_FILEPATH=$(sed 's/.*filePathPrefix\"\:\"//g' <<< $DESTINATION_API_REQ)
+#DESTINATION_FILEPATH=$(sed 's/\"\,\"storageType.*//g' <<< $DESTINATION_FILEPATH)
+DESTINATION_FILEPATH=$(echo $DESTINATION_API_REQ | sed 's/.*filePathPrefix\"\:\"//g')
+DESTINATION_FILEPATH=$(echo $DESTINATION_FILEPATH | sed 's/\"\,\"storageType.*//g')
 
 date >> output.txt
 echo "Destination request parsed" >> output.txt
