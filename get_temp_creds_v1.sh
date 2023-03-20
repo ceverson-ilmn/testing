@@ -98,7 +98,7 @@ date >> output.txt
 echo "Constructed rclone file for Destination" >> output.txt
 
 #Construct final command
-FINAL_COMMAND="rclone -P --config rclone_config.tmp sync SOURCE:/\"$SOURCE_FILEPATH\" DESTINATION:/\"$DESTINATION_FILEPATH\""
+FINAL_COMMAND="rclone -P --config rclone_config.tmp copy SOURCE:/\"$SOURCE_FILEPATH\" DESTINATION:/\"$DESTINATION_FILEPATH\""
 
 date >> output.txt
 echo "Final command constructed" >> output.txt
