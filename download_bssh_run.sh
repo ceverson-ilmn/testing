@@ -65,7 +65,7 @@ echo "Executing run download command from BSSH" >> output.txt
 
 
 #Run BSSH bs cli download command
-bs download run --concurrency=high --api-server "https://api.basespace.illumina.com" --access-token $BSSH_API --id $RUN_ID -o ./runfolder/$RUN_ID 2>> output.txt
+bs download run --concurrency=high --api-server "https://api.basespace.illumina.com" --access-token $BSSH_API --id $RUN_ID -o ./runfolder/$RUN_ID
 
 date >> output.txt
 echo "Constructing final upload command" >> output.txt
