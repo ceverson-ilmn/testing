@@ -1,0 +1,40 @@
+#Add your commands below.
+#ENV USER root
+RUN apt-get update
+RUN apt-get install nano curl wget htop screen rsync gcc tree git cron zip speedtest-cli lsb-release whois sqlite3 lsof nmap vim -y
+
+#Install latest version of rclone
+ENV USER root
+RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+RUN unzip rclone-current-linux-amd64.zip
+RUN cp ./rclone-*-linux-amd64/rclone /usr/bin/
+RUN chown root:root /usr/bin/rclone
+RUN chmod 755 /usr/bin/rclone
+
+
+#Install latest version of BaseSpace CLI
+ENV USER root
+RUN wget "https://launch.basespace.illumina.com/CLI/latest/amd64-linux/bs" -O /usr/bin/bs
+RUN chown root:root /usr/bin/bs
+RUN chmod 755 /usr/bin/bs
+
+#Install Test/Working Script
+ENV USER root
+RUN wget https://raw.githubusercontent.com/ceverson-ilmn/testing/main/test_tool.sh
+RUN cp ./test_tool.sh /usr/bin/
+RUN chown root:root /usr/bin/test_tool.sh
+RUN chmod 755 /usr/bin/test_tool.sh
+
+#Install Project Transfer Script
+ENV USER root
+RUN wget https://raw.githubusercontent.com/ceverson-ilmn/testing/main/get_temp_creds_v1.sh
+RUN cp ./get_temp_creds_v1.sh /usr/bin/
+RUN chown root:root /usr/bin/get_temp_creds_v1.sh
+RUN chmod 755 /usr/bin/get_temp_creds_v1.sh
+
+#Install BSSH to ICA script
+ENV USER root
+RUN wget https://raw.githubusercontent.com/ceverson-ilmn/testing/main/download_bssh_run.sh
+RUN cp ./download_bssh_run.sh /usr/bin/
+RUN chown root:root /usr/bin/download_bssh_run.sh
+RUN chmod 755 /usr/bin/download_bssh_run.sh
